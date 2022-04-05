@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block body %}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url({{ url_for('static',filename='assets/img/home-bg.jpg')}} )">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Admin Panel</h1>
+                            <span class="subheading">Manage your posts and change them!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <h1>Basic Actions</h1>
+                         <a href='/dashboard'><button class = 'btn btn-primary'>Dashboard Home </button></a>
+                         <a href='/logout'><button class = 'btn btn-primary'>Logout </button></a>
+                        <hr>
+                    <h1>Add/Edit Posts</h1>
+                    <form name = 'sentMessage' id="postForm" method = 'post' action ='/edit/{{post.sno}}' novalidate>
+                                <div class="form-floating">
+                                    <input class="form-control" id="title" name='title' type="text" placeholder="Title" data-sb-validations="required" value="{{post.title}}"/>
+                                    <label for="title">Title</label>
+                                    <div class="invalid-feedback" data-sb-feedback="title:required">A title is required.</div>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="tagline" name='tagline' type="text" placeholder="Tagline" data-sb-validations="required" value="{{post.tagline}}" />
+                                    <label for="tagline">Tagline</label>
+                                    <div class="invalid-feedback" data-sb-feedback="tagline:required">An Tagline is required.</div>                 
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="slug" name = 'slug' type="text" placeholder="Slug" data-sb-validations="required" value="{{post.slug}}"/>
+                                    <label for="slug">Slug</label>
+                                    <div class="invalid-feedback" data-sb-feedback="slug:required">A slug is required.</div>
+                                </div>
+                                <div class="form-floating">
+                                    <textarea row="5" class="form-control" id="content" name='content' placeholder="Content" data-sb-validations="required" required data-validation-required-message="Please enter content" >{{post.content}}</textarea>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" type="text" id="img_file" name='img_file' placeholder="Image file" value="{{post.img_file}}"></input>
+                                    <label for="img_file">Image File</label>
+                                    <div class="invalid-feedback" data-sb-feedback="img_file:required">Image file is required.</div>
+                                </div>
+                                <!-- Submit Button-->
+                                <div id="success"></div>
+                                <div class="form-group">
+                                <button class="btn btn-primary" id="submitButton" type="submit">Submit</button>
+                            </form>
+                    <!-- Pager-->
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#">Older Posts →</a></div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
