@@ -22,7 +22,7 @@
                          <a href='/logout'><button class = 'btn btn-primary'>Logout </button></a>
                         <hr>
                     <h1>Add/Edit Posts</h1>
-                    <form name = 'sentMessage' id="postForm" method = 'post' action ='/edit/{{post.sno}}' novalidate>
+                    <form name = 'sentMessage' id="postForm" method = 'post' action ='/edit/{{sno}}' novalidate>
                                 <div class="form-floating">
                                     <input class="form-control" id="title" name='title' type="text" placeholder="Title" data-sb-validations="required" value="{{post.title}}"/>
                                     <label for="title">Title</label>
