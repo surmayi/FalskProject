@@ -3,7 +3,7 @@ from datetime import datetime
 import json
 import os
 from werkzeug.utils import secure_filename
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 
@@ -54,6 +54,8 @@ class Posts(db.Model):
 
 @app.route('/')
 def home():
+    flash('Welcome to Coding Thunder', 'success')
+    flash('Let put up some blogs','secondary')
     posts = Posts.query.filter_by().all()
     last = math.ceil(len(posts)/int(params['no_of_posts']))
     page=request.args.get('page')
@@ -144,7 +146,7 @@ def edit(sno):
                 db.session.commit()
                 return redirect('/edit/' + sno)
         post = Posts.query.filter_by(sno=sno).first()
-        return render_template('edit.html',params=params,post=post)
+        return render_template('edit.html',params=params,post=post, sno=sno)
 
 
 @app.route('/uploader', methods=['GET','POST'])
@@ -170,7 +172,7 @@ def contact():
         db.session.commit()
         mail.send_message('New contact created by '+name,sender=email,recipients=[params['gmail_user']],
                           body = msg + '\n' + phone_num )
-
+        flash('Thanks for contacting us, we will get back to you soon!', 'success')
     return render_template('contact.html', params=params)
 
 
